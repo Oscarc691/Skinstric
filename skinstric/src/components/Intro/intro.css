@@ -1,0 +1,13 @@
+*{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+   
+}
+ .intro-title {
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    margin: auto;
+    box-sizing: border-box;
+ }
