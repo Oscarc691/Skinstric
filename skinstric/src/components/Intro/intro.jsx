@@ -4,19 +4,19 @@ import "./intro.css";
 const App = () => {
   const handleDiscoverAI = () => {
     alert("Navigating to AI discovery...");
-    // You can replace this with: window.location.href = "/discover-ai";
+    // can replace this with: window.location.href = "/discover-ai";
   };
 
   const handleTakeTest = () => {
     alert("Taking the skincare test...");
-    // You can replace this with: window.location.href = "/take-test";
+    // can replace this with: window.location.href = "/take-test";
   };
 
   const handleEnterCode = () => {
     const code = prompt("Enter your code:");
     if (code) {
       alert(`Code entered: ${code}`);
-      // You can replace this with actual validation logic
+      // can replace this with validation logic
     }
   };
 
@@ -51,7 +51,7 @@ const App = () => {
       {/* Footer */}
       <footer className="footer">
         SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALISED ROUTINE
-        TAILORED TO
+        TAILORED TO WHAT YOUR SKIN NEEDS.
       </footer>
     </div>
   );
