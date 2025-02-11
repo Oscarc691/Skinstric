@@ -1,5 +1,5 @@
 /* Reset default styles */
-body, html {
+/* body, html {
    margin: 0;
    padding: 0;
    font-family: "Arial", sans-serif;
@@ -10,7 +10,7 @@ body, html {
    justify-content: center;
    align-items: center;
    text-align: center;
- }
+ } */
  
  /* Main container */
  .container {
@@ -18,7 +18,6 @@ body, html {
    width: 100%;
    height: 100vh;
    display: flex;
-   flex-direction: column;
    justify-content: center;
    align-items: center;
  }
@@ -73,7 +72,7 @@ body, html {
  }
  
  /* Left navigation */
- .left {
+ .side-navigation left {
    left: 30px;
    text-align: left;
  }
@@ -96,10 +95,11 @@ body, html {
  /* Footer text */
  .footer {
    position: absolute;
-   bottom: 20px;
+   bottom: 10px;
    font-size: 12px;
    color: black;
-   width: 80%;
+   width: 100%;
    text-align: center;
+   padding: 15px 0;
  }
  
