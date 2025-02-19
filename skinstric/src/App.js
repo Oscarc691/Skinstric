@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import DiscoverAI from "./components/DiscoverAI/DiscoverAI";
-import TakeTest from "./components/TakeTest/TakeTest";
+import IntroduceYourself from "./components/Introduce/Introduce";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/discover-ai" element={<DiscoverAI />} />
-        <Route path="/take-test" element={<TakeTest />} />
+        <Route path="/Introduce" element={<IntroduceYourself />} />
       </Routes>
     </Router>
   );
