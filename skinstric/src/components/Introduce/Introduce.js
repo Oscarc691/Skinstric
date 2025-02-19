@@ -26,7 +26,7 @@ export default function IntroduceYourself() {
         <p className="click-to-type" onClick={handleClick}>
           Click To Type
         </p>
-        <h1 className="title">Where are you from?</h1>
+        <h1 className="titleI">Where are you from?</h1>
 
         {isTyping && (
           <input
