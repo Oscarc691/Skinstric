@@ -1,7 +1,7 @@
 .container {
      flex :items-center justify-center h-screen bg-white text-black relative;
   }
-  .title{
+  .titleI{
     rotate: -45deg;
   text-decoration: underline;
   font-size: 2rem;
