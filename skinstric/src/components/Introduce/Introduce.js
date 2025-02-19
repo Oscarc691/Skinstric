@@ -1,7 +1,5 @@
 import { useState } from "react";
 import "./introduce.css"; // Import the CSS file
-import { useNavigate } from "react-router-dom";
-
 
 
 
@@ -12,8 +10,7 @@ export default function IntroduceYourself() {
   const handleClick = () => {
     setIsTyping(true);
   };
-const Home = () => {
-  const navigate = useNavigate();
+
 
   return (
     <div className="container">
@@ -42,7 +39,7 @@ const Home = () => {
       </div>
 
       {/* Bottom Left Back Button */}
-      <p className="back-button" onClick={() => navigate("/Home")}>&#9665; BACK</p>
+      <p className="back-button" onClick={() => ("/Home")}>&#9665; BACK</p>
     </div>
   );
 };
