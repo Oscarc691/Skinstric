@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "../styles.css";
 import { HiOutlinePaperAirplane } from "react-icons/hi2";
 
-
 const Home = () => {
   const navigate = useNavigate();
 
@@ -29,7 +28,7 @@ const Home = () => {
 
       <div className="absolute right-0 top-1/2 -translate-y-1/2">
       <div className="w-32 h-32 border-2 border-dotted border-gray-700 transform rotate-45 flex items-center justify-center">
-      <div className="side-navigation right" onClick={() => navigate("/take-test")}>
+      <div className="side-navigation right" onClick={() => navigate("/Introduce")}>
         <div className="nav-item">TAKE TEST         <HiOutlinePaperAirplane /></div>
       </div>
       </div>
@@ -44,3 +43,4 @@ const Home = () => {
 };
 
 export default Home;
+
