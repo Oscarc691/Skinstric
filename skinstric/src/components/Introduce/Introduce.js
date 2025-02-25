@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./introduce.css"; // Import the CSS file
+import "./introduce.css";
 import { useNavigate } from "react-router-dom";
 
 export default function IntroduceYourself() {
@@ -9,9 +9,9 @@ export default function IntroduceYourself() {
   const handleClick = () => {
     setIsTyping(true);
   };
-  const handleBlur = () => {//+
-    setIsTyping(false);//+
-  };//+
+  const handleBlur = () => {
+    setIsTyping(false);
+  };
 
   return (
     <div className="container">
@@ -24,22 +24,27 @@ export default function IntroduceYourself() {
         <div className="outer-border"></div>
 
         {/* Click to Type */}
-        {isTyping ? (//+
-          <input//+
-            type="text"//+
-            className="input-box"//+
-            value={name}//+
+        {isTyping ? (
+          <input
+            type="text"
+            className="input-box"
+            value={name}
             onChange={(e) => setName(e.target.value)}
-            onBlur={handleBlur}//+
-            autoFocus//+
-          />//+
-        ) : (//+
+            onBlur={handleBlur}
+            autoFocus
+          />
+        ) : (
           <p className="click-to-type" onClick={handleClick}>
-            {name || "Click To Type"}
-          </p>//+
+            {name || "Click To Type"} 
+          </p>
+          
         )}
-        
-        <h1 className="titleI">Where are you from?</h1>
+          <p
+          className="absolute top-4 text-gray-500 cursor-pointer transform -rotate-45"
+          onClick={handleClick}
+        >
+         <h1 className = "TitleI"> Where are you from?
+        </h1></p>
       </div>
 
       {/* Bottom Left Back Button */}
