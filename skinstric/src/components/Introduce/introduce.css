@@ -1,10 +1,11 @@
 .container {
      flex :items-center justify-center h-screen bg-white text-black relative;
   }
-  .titleI{
+  .TitleI{
     rotate: -45deg;
   text-decoration: underline;
   font-size: 2rem;
+  padding-top: 15%;
   }
   .top-left-text {
     position: absolute;
