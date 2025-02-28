@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./introduce.css";
 import { useNavigate } from "react-router-dom";
-
+import SubmitButton from "./submit";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 export default function IntroduceYourself() {
   const [name, setName] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -63,23 +64,12 @@ export default function IntroduceYourself() {
         ) : (
           <p className="click-to-type" onClick={handleClick}>
             {name || "Click To Type"} 
-            <button 
-              className="submit-button"
-              onClick={() => {
-                handleBlur();
-                fetch('https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level1', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ name }),
-                });
-              }}
-            >
-              Submit
-            </button>
           </p>
+          
         )}
+        <Routes>
+          <SubmitButton />
+          </Routes>
         <p
           className="absolute top-4 text-gray-500 cursor-pointer transform -rotate-45"
           onClick={handleClick}
