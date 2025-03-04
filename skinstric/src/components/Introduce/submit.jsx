@@ -1,48 +1,32 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import React from 'react';
 import axios from 'axios';
 
-const SubmitButton = () => {
-  const [data, setData] = useState('');
-
-  function handleChange(e) {
-        setData(e.target.value);
-    }
+const SubmitButton = ({ name }) => {
 
   const handleSubmit = async () => {
-    if (data.trim() === '') {
-      alert('Please enter some data');
+    if (!name.trim()) {
+      alert('Please enter some information');
       return;
     }
 
     try {
-      // Save data to local storage
-      localStorage.setItem('formData', data);
-
-      // Replace 'YOUR_API_URL' with your desired API endpoint
-      const response = await axios.post('https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level1', { data });
-      console.log('Data saved:', response.data);
-      alert('Data successfully saved!');
+      const response = await axios.post('https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level1', { name });
+      console.log('Response:', response);
+      alert('Data submitted successfully');
     } catch (error) {
-      console.error('Error saving data:', error);
-      alert('Failed to save data');
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error:', error.response?.data || error.message);
+      } else {
+        console.error('Unexpected error:', error);
+      }
+      alert('Failed to submit data');
     }
   };
 
   return (
-    <div className="p-4">
-      <Input 
-        type="text" 
-        placeholder="Enter data..." 
-        value={data} 
-        onChange={handleChange} 
-        className="mb-2 p-2 border rounded"
-      />
-      <Button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded">
-        Submit
-      </Button>
-    </div>
+    <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded">
+      Submit
+    </button>
   );
 };
 
