@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./introduce.css";
 import { useNavigate } from "react-router-dom";
-import SubmitButton from "./submit";
 
 export default function IntroduceYourself() {
   const [name, setName] = useState("");  // initialize the name state
@@ -14,10 +13,11 @@ export default function IntroduceYourself() {
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const response = await fetch('https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level1');
+        const response = await fetch('/live/FES_Virtual_Internship_1/level1');
         const data = await response.json();
         if (data.name) {
           setName(data.name);
+          localStorage.setItem("name", data.name); // Save to local storage
         }
       } catch (error) {
         console.error('Error fetching name:', error);
@@ -29,6 +29,7 @@ export default function IntroduceYourself() {
   // Handle click to start typing
   const handleClick = () => {
     setIsTyping(true);
+    setTimeout(() => inputRef.current?.focus(), 0); // Automatically focus on input after clicking
   };
 
   // Handle submit name and prevent blur if clicking the button
@@ -43,7 +44,7 @@ export default function IntroduceYourself() {
     const trimmedName = name.trim();
 
     try {
-      await fetch('https://wk7wmfz7x8.execute-api.us-east-2.amazonaws.com/live/FES_Virtual_Internship_1/level1', {
+      await fetch('/live/FES_Virtual_Internship_1/level1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +52,9 @@ export default function IntroduceYourself() {
         body: JSON.stringify({ name: trimmedName }),
       });
       console.log('Name submitted successfully');
+      localStorage.setItem("name", trimmedName); // Save to local storage
+      setIsTyping(false); // Stop typing mode after submission
+      setName(trimmedName); // Emphasize the entered name
     } catch (error) {
       console.error('Error submitting name:', error);
     }
@@ -62,7 +66,7 @@ export default function IntroduceYourself() {
   };
 
   const handleBlur = (e) => {
-    if (!submitButtonRef.current.contains(e.relatedTarget)) {
+    if (!submitButtonRef.current || !submitButtonRef.current.contains(e.relatedTarget)) {
       setIsTyping(false);  // Only blur if not interacting with submit button
     }
   };
@@ -80,34 +84,34 @@ export default function IntroduceYourself() {
         {/* Click to Type */}
         {isTyping ? (
           <input
-            ref={inputRef}  // Using the input reference to handle focus
+            ref={inputRef}
             type="text"
-            className="input-box"
+            className="input-box emphasized"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onFocus={handleFocus} // Handle focus to ensure the input stays active
-            onBlur={handleBlur}  // Handle blur carefully
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             autoFocus
           />
         ) : (
-          <p className="click-to-type" onClick={handleClick}>
+          <p className="click-to-type emphasized" onClick={handleClick}>
             {name || "Click To Type"}
           </p>
         )}
 
         {/* Submit Button - Only shows when typing */}
         {isTyping && (
-          <div
-            ref={submitButtonRef} // Reference to the submit button
+          <button
+            ref={submitButtonRef}
             className="submit-button"
-            onClick={submitName}  // Trigger the submit function on click
+            onClick={submitName}
           >
-            <SubmitButton />
-          </div>
+            Submit
+          </button>
         )}
 
         <p
-          className="absolute top-4 text-gray-500 cursor-pointer transform -rotate-45"
+          className="absolute top-4 text-gray-500 cursor-pointer transform -rotate-45 smaller-title"
           onClick={handleClick}
         >
           <h1 className="TitleI">Where are you from?</h1>
