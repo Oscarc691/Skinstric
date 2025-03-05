@@ -5,25 +5,17 @@ import { useNavigate } from "react-router-dom";
 export default function IntroduceYourself() {
   const [name, setName] = useState("");  // initialize the name state
   const [isTyping, setIsTyping] = useState(false);  // track if the user is typing
+  const [isSubmitted, setIsSubmitted] = useState(false); // track if the name is submitted
   const inputRef = useRef(null);  // reference for the input field
   const submitButtonRef = useRef(null);  // reference for the submit button
   const navigate = useNavigate();
 
-  // Fetch the name from the API
+  // Remove the API call and use localStorage only
   useEffect(() => {
-    const fetchName = async () => {
-      try {
-        const response = await fetch('/live/FES_Virtual_Internship_1/level1');
-        const data = await response.json();
-        if (data.name) {
-          setName(data.name);
-          localStorage.setItem("name", data.name); // Save to local storage
-        }
-      } catch (error) {
-        console.error('Error fetching name:', error);
-      }
-    };
-    fetchName();
+    const storedName = localStorage.getItem("name");
+    if (storedName) {
+      setName(storedName); // Set the name from localStorage if it exists
+    }
   }, []);
 
   // Handle click to start typing
@@ -32,7 +24,7 @@ export default function IntroduceYourself() {
     setTimeout(() => inputRef.current?.focus(), 0); // Automatically focus on input after clicking
   };
 
-  // Handle submit name and prevent blur if clicking the button
+  // Handle submit name and save to console (localStorage)
   const submitName = async (e) => {
     e.stopPropagation(); // Prevents blur event from firing when clicking submit button
 
@@ -43,21 +35,13 @@ export default function IntroduceYourself() {
 
     const trimmedName = name.trim();
 
-    try {
-      await fetch('/live/FES_Virtual_Internship_1/level1', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: trimmedName }),
-      });
-      console.log('Name submitted successfully');
-      localStorage.setItem("name", trimmedName); // Save to local storage
-      setIsTyping(false); // Stop typing mode after submission
-      setName(trimmedName); // Emphasize the entered name
-    } catch (error) {
-      console.error('Error submitting name:', error);
-    }
+    // Instead of an API call, save the name to localStorage
+    localStorage.setItem("name", trimmedName); // Save to local storage
+    console.log("Name saved to localStorage:", trimmedName); // Log it in the console
+
+    setIsTyping(false); // Stop typing mode after submission
+    setIsSubmitted(true); // Set submitted state
+    setName(trimmedName); // Emphasize the entered name
   };
 
   // Handle focus and blur events
@@ -86,7 +70,7 @@ export default function IntroduceYourself() {
           <input
             ref={inputRef}
             type="text"
-            className="input-box emphasized"
+            className={isSubmitted ? "input-box emphasized" : "input-box"}
             value={name}
             onChange={(e) => setName(e.target.value)}
             onFocus={handleFocus}
@@ -94,7 +78,7 @@ export default function IntroduceYourself() {
             autoFocus
           />
         ) : (
-          <p className="click-to-type emphasized" onClick={handleClick}>
+          <p className={isSubmitted ? "click-to-type emphasized" : "click-to-type"} onClick={handleClick}>
             {name || "Click To Type"}
           </p>
         )}
@@ -111,7 +95,7 @@ export default function IntroduceYourself() {
         )}
 
         <p
-          className="absolute top-4 text-gray-500 cursor-pointer transform -rotate-45 smaller-title"
+          className={`absolute top-4 text-gray-500 cursor-pointer transform -rotate-45 ${isSubmitted ? "smaller-title" : ""}`}
           onClick={handleClick}
         >
           <h1 className="TitleI">Where are you from?</h1>
