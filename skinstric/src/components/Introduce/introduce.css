@@ -1,7 +1,7 @@
 .container {
      flex :items-center justify-center h-screen bg-white text-black relative;
   }
-  .TitleI{
+  .question{
     rotate: -45deg;
   text-decoration: underline;
   font-size: 2rem;
@@ -80,3 +80,36 @@
     cursor: pointer;
     margin-left: -300%;
   }
+  .response-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  /* Swap Title and Answer */
+  .swapped {
+    flex-direction: column-reverse;
+  }
+  
+  /* Make Answer Bigger */
+  .answer {
+    font-size: 2rem;
+    font-weight: bold;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .emphasized {
+    font-size: 3rem;
+    color: #ff6600;
+    rotate: -45deg;
+  }
+  
+  /* Make Title Smaller */
+  .small-title {
+    font-size: 1rem;
+    color: gray;
+    transition: all 0.5s ease-in-out;
+    rotate: -45deg;
+  }
+  
