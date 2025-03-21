@@ -21,7 +21,8 @@ export default function IntroduceYourself() {
   // Handle click to start typing
   const handleClick = () => {
     setIsTyping(true);
-    setTimeout(() => inputRef.current?.focus(), 0);
+  setIsSubmitted(false); // Reset submission state to allow editing
+  setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   // Handle submit name
