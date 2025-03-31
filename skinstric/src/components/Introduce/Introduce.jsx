@@ -15,14 +15,15 @@ export default function IntroduceYourself() {
     const storedName = localStorage.getItem("name");
     if (storedName) {
       setName(storedName);
+      setIsSubmitted(true); // Ensure it shows the saved name properly
     }
   }, []);
 
   // Handle click to start typing
   const handleClick = () => {
     setIsTyping(true);
-  setIsSubmitted(false); // Reset submission state to allow editing
-  setTimeout(() => inputRef.current?.focus(), 0);
+    setIsSubmitted(false); // Reset submission state to allow editing
+    setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   // Handle submit name
@@ -44,7 +45,6 @@ export default function IntroduceYourself() {
   };
 
   // Handle focus and blur
-  const handleFocus = () => setIsTyping(true);
   const handleBlur = (e) => {
     if (!submitButtonRef.current || !submitButtonRef.current.contains(e.relatedTarget)) {
       setIsTyping(false);
@@ -64,12 +64,26 @@ export default function IntroduceYourself() {
         {/* Swapped positions based on isSubmitted */}
         <div className={`response-container ${isSubmitted ? "swapped" : ""}`}>
           {/* Answer (Emphasized when submitted) */}
-          <p
-            className={isSubmitted ? "answer emphasized" : "click-to-type"}
-            onClick={handleClick}
-          >
-            {isSubmitted ? name : "Click To Type"}
-          </p>
+          {isTyping ? (
+            <div className="input-wrapper">
+              <input
+                ref={inputRef}
+                type="text"
+                className="input-box"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onBlur={handleBlur}
+                onKeyPress={(e) => e.key === "Enter" && submitName(e)}
+              />
+            </div>
+          ) : (
+            <p
+              className={isSubmitted ? "answer emphasized" : "click-to-type"}
+              onClick={handleClick}
+            >
+              {isSubmitted ? name : "Click To Type"}
+            </p>
+          )}
 
           {/* Title (Smaller when submitted) */}
           <div className={`question ${isSubmitted ? "small-title" : ""}`} onClick={handleClick}>
