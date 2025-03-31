@@ -25,6 +25,7 @@
     justify-content: center;
     border: 1px dashed #d1d5db;
     transform: rotate(45deg);
+    margin: 20% 20% 20% 20%;
   }
 
   .inner-border {
@@ -104,7 +105,7 @@
   
   .emphasized {
     font-size: 3rem;
-    color: #ff6600;
+    color: black;
     rotate: -45deg;
   }
   
