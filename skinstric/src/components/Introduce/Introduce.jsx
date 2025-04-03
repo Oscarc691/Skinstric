@@ -51,6 +51,13 @@ export default function IntroduceYourself() {
     }
   };
 
+  // Handle Back Button Click
+  const goBack = (e) => {
+    e.stopPropagation();
+    console.log("Navigating back...");
+    navigate("/");
+  };
+
   return (
     <div className="container">
       {/* Top Left Text */}
@@ -100,7 +107,7 @@ export default function IntroduceYourself() {
       </div>
 
       {/* Bottom Left Back Button */}
-      <p className="back-button" onClick={() => navigate("/")}>&#9665; BACK</p>
+      <p className="back-button" onClick={goBack}>&#9665; BACK</p>
     </div>
   );
 }
