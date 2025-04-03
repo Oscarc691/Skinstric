@@ -68,11 +68,10 @@ export default function IntroduceYourself() {
         <div className="inner-border"></div>
         <div className="outer-border"></div>
 
-        {/* Swapped positions based on isSubmitted */}
+        {/* Flex container to align input and submit button */}
         <div className={`response-container ${isSubmitted ? "swapped" : ""}`}>
-          {/* Answer (Emphasized when submitted) */}
-          {isTyping ? (
-            <div className="input-wrapper">
+          <div className="input-submit-container">
+            {isTyping ? (
               <input
                 ref={inputRef}
                 type="text"
@@ -82,28 +81,26 @@ export default function IntroduceYourself() {
                 onBlur={handleBlur}
                 onKeyPress={(e) => e.key === "Enter" && submitName(e)}
               />
-            </div>
-          ) : (
-            <p
-              className={isSubmitted ? "answer emphasized" : "click-to-type"}
-              onClick={handleClick}
-            >
-              {isSubmitted ? name : "Click To Type"}
-            </p>
-          )}
+            ) : (
+              <p
+                className={isSubmitted ? "answer emphasized" : "click-to-type"}
+                onClick={handleClick}
+              >
+                {isSubmitted ? name : "Click To Type"}
+              </p>
+            )}
+
+            {/* Submit Button always visible next to input/text */}
+            <button ref={submitButtonRef} className="submit-button" onClick={submitName}>
+              Submit
+            </button>
+          </div>
 
           {/* Title (Smaller when submitted) */}
           <div className={`question ${isSubmitted ? "small-title" : ""}`} onClick={handleClick}>
             Where are you from?
           </div>
         </div>
-
-        {/* Submit Button - Only visible while typing */}
-        {isTyping && (
-          <button ref={submitButtonRef} className="submit-button" onClick={submitName}>
-            Submit
-          </button>
-        )}
       </div>
 
       {/* Bottom Left Back Button */}
